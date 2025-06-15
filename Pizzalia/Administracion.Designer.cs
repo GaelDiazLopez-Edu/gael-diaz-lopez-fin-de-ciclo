@@ -48,22 +48,23 @@
             // 
             // button1
             // 
-            button1.Location = new Point(566, 160);
+            button1.Location = new Point(306, 160);
             button1.Name = "button1";
-            button1.Size = new Size(112, 73);
+            button1.Size = new Size(182, 73);
             button1.TabIndex = 1;
-            button1.Text = "Usuarios";
+            button1.Text = "Repartidores";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
             // button2
             // 
-            button2.Location = new Point(88, 160);
+            button2.Location = new Point(30, 160);
             button2.Name = "button2";
-            button2.Size = new Size(112, 73);
+            button2.Size = new Size(182, 73);
             button2.TabIndex = 2;
             button2.Text = "Inventario";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button3
             // 
@@ -77,9 +78,9 @@
             // 
             // button4
             // 
-            button4.Location = new Point(253, 160);
+            button4.Location = new Point(588, 160);
             button4.Name = "button4";
-            button4.Size = new Size(112, 73);
+            button4.Size = new Size(182, 73);
             button4.TabIndex = 4;
             button4.Text = "Articulos";
             button4.UseVisualStyleBackColor = true;
@@ -89,6 +90,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.InactiveCaption;
             ClientSize = new Size(800, 450);
             Controls.Add(button4);
             Controls.Add(button3);

@@ -8,15 +8,34 @@ namespace Pizzalia
     {
         public event EventHandler LoginSuccess;
 
-        public string RepartidorSeleccionado { get; private set; }
 
         public Login()
         {
             InitializeComponent();
+            this.KeyPreview = true;
+            this.KeyDown += Login_KeyDown;
+
             labelContraseña.Visible = false;
             inputContra.Visible = false;
             comboBoxRepartidor.Visible = false;
             labelRepartidor.Visible = false;
+        }
+
+        private void Login_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1)
+            {
+                string licencia = @"Este software es propiedad de Pizzalia. Se concede al cliente una licencia no exclusiva, intransferible y limitada, para usar el software únicamente en su negocio, bajo las siguientes condiciones:
+
+- El cliente ha realizado el pago único por el derecho de uso.
+- El mantenimiento técnico y las actualizaciones se ofrecen bajo una cuota anual renovable.
+- El software no puede copiarse, compartirse, sub-licenciarse ni modificarse sin autorización expresa.
+- El código fuente no se proporciona.
+- Solo Pizzalia puede realizar cambios, integraciones o personalizaciones.";
+
+                MessageBox.Show(licencia, "Licencia de uso - Pizzalia", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                e.SuppressKeyPress = true;
+            }
         }
 
         private void comboBoxLogin_SelectedIndexChanged(object sender, EventArgs e)
@@ -27,7 +46,7 @@ namespace Pizzalia
             {
                 labelContraseña.Visible = true;
                 inputContra.Visible = true;
-                inputContra.PasswordChar = '*'; // <-- Aquí ocultas la contraseña
+                inputContra.PasswordChar = '*';
                 comboBoxRepartidor.Visible = false;
                 labelRepartidor.Visible = false;
             }
@@ -62,8 +81,10 @@ namespace Pizzalia
             {
                 if (UsuarioManager.ValidarAdministrador(inputContra.Text))
                 {
-                    LoginSuccess?.Invoke(this, EventArgs.Empty);
-                    return;
+                    this.Hide(); // Oculta el login
+                    Administracion adminForm = new Administracion();
+                    adminForm.ShowDialog();
+                    this.Show(); // Vuelve a mostrar el login después de cerrar Administracion
                 }
                 else
                 {
@@ -81,13 +102,13 @@ namespace Pizzalia
                     return;
                 }
 
-                // Solo validamos que el repartidor existe en la lista
                 var existe = UsuarioCrudManager.CargarUsuarios().Any(u => u.Nombre == repartidor);
                 if (existe)
                 {
-                    RepartidorSeleccionado = repartidor; // <-- Guardamos el nombre seleccionado
-                    LoginSuccess?.Invoke(this, EventArgs.Empty); // Lanzamos el evento de login exitoso
-                    return;
+                    this.Hide(); // Oculta el login
+                    MotoristaPedidosForm form = new MotoristaPedidosForm(repartidor);
+                    form.ShowDialog();
+                    this.Show(); // Vuelve a mostrar el login al cerrar el formulario
                 }
                 else
                 {
@@ -96,9 +117,10 @@ namespace Pizzalia
             }
             else if (seleccionado == "Empleado/Camarero")
             {
-                // Aquí podrías lanzar el evento de login para camarero si lo necesitas
-                LoginSuccess?.Invoke(this, EventArgs.Empty);
-                return;
+                this.Hide(); // Oculta el login
+                SeleccionTipoDePedidoForm tipoPedidoForm = new SeleccionTipoDePedidoForm();
+                tipoPedidoForm.ShowDialog(); // Abre el formulario de empleados
+                this.Show(); // Vuelve a mostrar el login al cerrar el formulario
             }
             else
             {

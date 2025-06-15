@@ -19,7 +19,16 @@ namespace Pizzalia
             dataGridViewUsuarios.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewUsuarios.MultiSelect = false;
             dataGridViewUsuarios.AutoGenerateColumns = true;
+
+            // Cambia el encabezado de la columna "NumeroMoto" a "Moto"
+            if (dataGridViewUsuarios.Columns["NumeroMoto"] != null)
+                dataGridViewUsuarios.Columns["NumeroMoto"].HeaderText = "Moto";
+
+            // Cabecera en negrita
+            dataGridViewUsuarios.ColumnHeadersDefaultCellStyle.Font =
+                new Font(dataGridViewUsuarios.Font, FontStyle.Bold);
         }
+
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
@@ -29,9 +38,17 @@ namespace Pizzalia
                 return;
             }
 
+            // Validar nombre duplicado
+            string nuevoNombre = txtNombre.Text.Trim();
+            if (usuarios.Any(u => u.Nombre.Equals(nuevoNombre, StringComparison.OrdinalIgnoreCase)))
+            {
+                MessageBox.Show("Ya existe un repartidor con ese nombre.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             usuarios.Add(new Usuario
             {
-                Nombre = txtNombre.Text.Trim(),
+                Nombre = nuevoNombre,
                 NumeroMoto = txtNumeroMoto.Text.Trim(),
                 Telefono = txtTelefono.Text.Trim()
             });
@@ -44,9 +61,20 @@ namespace Pizzalia
         {
             if (selectedRow >= 0 && selectedRow < usuarios.Count)
             {
-                usuarios[selectedRow].Nombre = txtNombre.Text.Trim();
-                usuarios[selectedRow].NumeroMoto = txtNumeroMoto.Text.Trim();
-                usuarios[selectedRow].Telefono = txtTelefono.Text.Trim();
+                var usuarioActual = usuarios[selectedRow];
+                string nuevoNombre = txtNombre.Text.Trim();
+
+                // Validar nombre duplicado (excepto el actual)
+                if (usuarios.Any(u => u != usuarioActual && u.Nombre.Equals(nuevoNombre, StringComparison.OrdinalIgnoreCase)))
+                {
+                    MessageBox.Show("Ya existe otro repartidor con ese nombre.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                usuarioActual.Nombre = nuevoNombre;
+                usuarioActual.NumeroMoto = txtNumeroMoto.Text.Trim();
+                usuarioActual.Telefono = txtTelefono.Text.Trim();
+
                 dataGridViewUsuarios.Refresh();
                 GuardarUsuarios();
                 LimpiarCampos();

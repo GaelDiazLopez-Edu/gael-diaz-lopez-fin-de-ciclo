@@ -45,26 +45,27 @@
             // 
             // btnAgregar
             // 
-            btnAgregar.Location = new Point(60, 336);
+            btnAgregar.BackColor = Color.FromArgb(255, 255, 192);
+            btnAgregar.Location = new Point(60, 318);
             btnAgregar.Name = "btnAgregar";
             btnAgregar.Size = new Size(112, 48);
             btnAgregar.TabIndex = 0;
             btnAgregar.Text = "Agregar";
-            btnAgregar.UseVisualStyleBackColor = true;
+            btnAgregar.UseVisualStyleBackColor = false;
             btnAgregar.Click += btnAgregar_Click;
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(524, 87);
+            txtNombre.Location = new Point(614, 87);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(241, 31);
+            txtNombre.Size = new Size(162, 31);
             txtNombre.TabIndex = 1;
             // 
             // txtNumeroMoto
             // 
-            txtNumeroMoto.Location = new Point(524, 143);
+            txtNumeroMoto.Location = new Point(614, 143);
             txtNumeroMoto.Name = "txtNumeroMoto";
-            txtNumeroMoto.Size = new Size(241, 31);
+            txtNumeroMoto.Size = new Size(162, 31);
             txtNumeroMoto.TabIndex = 2;
             // 
             // dataGridViewUsuarios
@@ -73,21 +74,21 @@
             dataGridViewUsuarios.Location = new Point(27, 30);
             dataGridViewUsuarios.Name = "dataGridViewUsuarios";
             dataGridViewUsuarios.RowHeadersWidth = 62;
-            dataGridViewUsuarios.Size = new Size(360, 225);
+            dataGridViewUsuarios.Size = new Size(468, 225);
             dataGridViewUsuarios.TabIndex = 3;
             dataGridViewUsuarios.SelectionChanged += dataGridViewUsuarios_SelectionChanged;
             // 
             // txtTelefono
             // 
-            txtTelefono.Location = new Point(524, 201);
+            txtTelefono.Location = new Point(614, 201);
             txtTelefono.Name = "txtTelefono";
-            txtTelefono.Size = new Size(241, 31);
+            txtTelefono.Size = new Size(162, 31);
             txtTelefono.TabIndex = 4;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(411, 93);
+            label1.Location = new Point(501, 93);
             label1.Name = "label1";
             label1.Size = new Size(82, 25);
             label1.TabIndex = 5;
@@ -96,7 +97,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(417, 149);
+            label2.Location = new Point(507, 149);
             label2.Name = "label2";
             label2.Size = new Size(60, 25);
             label2.TabIndex = 6;
@@ -105,7 +106,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(413, 206);
+            label3.Location = new Point(503, 206);
             label3.Name = "label3";
             label3.Size = new Size(83, 25);
             label3.TabIndex = 7;
@@ -113,39 +114,42 @@
             // 
             // btnModificar
             // 
-            btnModificar.Location = new Point(243, 336);
+            btnModificar.BackColor = Color.LightGray;
+            btnModificar.Location = new Point(243, 318);
             btnModificar.Name = "btnModificar";
             btnModificar.Size = new Size(112, 48);
             btnModificar.TabIndex = 8;
             btnModificar.Text = "Modificar";
-            btnModificar.UseVisualStyleBackColor = true;
+            btnModificar.UseVisualStyleBackColor = false;
             btnModificar.Click += btnModificar_Click;
             // 
             // btnEliminar
             // 
-            btnEliminar.Location = new Point(445, 336);
+            btnEliminar.BackColor = Color.IndianRed;
+            btnEliminar.Location = new Point(445, 318);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(112, 48);
             btnEliminar.TabIndex = 9;
             btnEliminar.Text = "Eliminar";
-            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.UseVisualStyleBackColor = false;
             btnEliminar.Click += btnEliminar_Click;
             // 
             // btnLimpiar
             // 
-            btnLimpiar.Location = new Point(625, 336);
+            btnLimpiar.BackColor = SystemColors.ActiveCaption;
+            btnLimpiar.Location = new Point(625, 318);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(112, 48);
             btnLimpiar.TabIndex = 10;
             btnLimpiar.Text = "Limpiar";
-            btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.UseVisualStyleBackColor = false;
             btnLimpiar.Click += btnLimpiar_Click;
             // 
             // Usuarios
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 397);
             Controls.Add(btnLimpiar);
             Controls.Add(btnEliminar);
             Controls.Add(btnModificar);

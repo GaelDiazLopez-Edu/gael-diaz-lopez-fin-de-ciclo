@@ -50,14 +50,14 @@
             dataGridViewArticulos.Location = new Point(23, 12);
             dataGridViewArticulos.Name = "dataGridViewArticulos";
             dataGridViewArticulos.RowHeadersWidth = 62;
-            dataGridViewArticulos.Size = new Size(587, 337);
+            dataGridViewArticulos.Size = new Size(587, 354);
             dataGridViewArticulos.TabIndex = 0;
             dataGridViewArticulos.CellClick += dataGridViewArticulos_CellClick;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(638, 119);
+            label1.Location = new Point(640, 48);
             label1.Name = "label1";
             label1.Size = new Size(78, 25);
             label1.TabIndex = 1;
@@ -66,7 +66,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(648, 167);
+            label2.Location = new Point(650, 96);
             label2.Name = "label2";
             label2.Size = new Size(60, 25);
             label2.TabIndex = 2;
@@ -74,7 +74,8 @@
             // 
             // numericUpDownPrecio
             // 
-            numericUpDownPrecio.Location = new Point(766, 164);
+            numericUpDownPrecio.DecimalPlaces = 2;
+            numericUpDownPrecio.Location = new Point(768, 93);
             numericUpDownPrecio.Name = "numericUpDownPrecio";
             numericUpDownPrecio.Size = new Size(180, 31);
             numericUpDownPrecio.TabIndex = 3;
@@ -83,7 +84,7 @@
             // 
             comboBoxCategoria.FormattingEnabled = true;
             comboBoxCategoria.Items.AddRange(new object[] { "Pizzas", "Complementos", "Bebidas", "Postres" });
-            comboBoxCategoria.Location = new Point(764, 216);
+            comboBoxCategoria.Location = new Point(766, 145);
             comboBoxCategoria.Name = "comboBoxCategoria";
             comboBoxCategoria.Size = new Size(182, 33);
             comboBoxCategoria.TabIndex = 4;
@@ -91,7 +92,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(635, 219);
+            label3.Location = new Point(637, 148);
             label3.Name = "label3";
             label3.Size = new Size(88, 25);
             label3.TabIndex = 5;
@@ -99,57 +100,60 @@
             // 
             // textBoxNombre
             // 
-            textBoxNombre.Location = new Point(764, 115);
+            textBoxNombre.Location = new Point(766, 44);
             textBoxNombre.Name = "textBoxNombre";
             textBoxNombre.Size = new Size(182, 31);
             textBoxNombre.TabIndex = 6;
-            textBoxNombre.TextChanged += textBoxNombre_TextChanged;
             // 
             // btnAgregar
             // 
-            btnAgregar.Location = new Point(122, 434);
+            btnAgregar.BackColor = Color.FromArgb(255, 255, 192);
+            btnAgregar.Location = new Point(650, 220);
             btnAgregar.Name = "btnAgregar";
             btnAgregar.Size = new Size(112, 49);
             btnAgregar.TabIndex = 7;
             btnAgregar.Text = "Agregar";
-            btnAgregar.UseVisualStyleBackColor = true;
+            btnAgregar.UseVisualStyleBackColor = false;
             btnAgregar.Click += btnAgregar_Click;
             // 
             // btnEditar
             // 
-            btnEditar.Location = new Point(311, 434);
+            btnEditar.BackColor = Color.LightGray;
+            btnEditar.Location = new Point(799, 220);
             btnEditar.Name = "btnEditar";
             btnEditar.Size = new Size(112, 49);
             btnEditar.TabIndex = 8;
             btnEditar.Text = "Modificar";
-            btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.UseVisualStyleBackColor = false;
             btnEditar.Click += btnEditar_Click;
             // 
             // btnEliminar
             // 
-            btnEliminar.Location = new Point(498, 434);
+            btnEliminar.BackColor = Color.IndianRed;
+            btnEliminar.Location = new Point(650, 300);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(112, 49);
             btnEliminar.TabIndex = 9;
             btnEliminar.Text = "Eliminar";
-            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.UseVisualStyleBackColor = false;
             btnEliminar.Click += btnEliminar_Click;
             // 
             // btnLimpiar
             // 
-            btnLimpiar.Location = new Point(673, 434);
+            btnLimpiar.BackColor = SystemColors.ActiveCaption;
+            btnLimpiar.Location = new Point(799, 300);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(112, 49);
             btnLimpiar.TabIndex = 10;
             btnLimpiar.Text = "Limpiar";
-            btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.UseVisualStyleBackColor = false;
             btnLimpiar.Click += btnLimpiar_Click;
             // 
             // Articulos
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(975, 557);
+            ClientSize = new Size(975, 420);
             Controls.Add(btnLimpiar);
             Controls.Add(btnEliminar);
             Controls.Add(btnEditar);

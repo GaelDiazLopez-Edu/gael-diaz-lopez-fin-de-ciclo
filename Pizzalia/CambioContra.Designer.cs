@@ -71,22 +71,24 @@
             // 
             // btnGuardarContra
             // 
+            btnGuardarContra.BackColor = SystemColors.ActiveCaption;
             btnGuardarContra.Location = new Point(57, 218);
             btnGuardarContra.Name = "btnGuardarContra";
             btnGuardarContra.Size = new Size(132, 58);
             btnGuardarContra.TabIndex = 4;
             btnGuardarContra.Text = "Guardar";
-            btnGuardarContra.UseVisualStyleBackColor = true;
+            btnGuardarContra.UseVisualStyleBackColor = false;
             btnGuardarContra.Click += btnGuardarContra_Click;
             // 
             // btnCancelar
             // 
+            btnCancelar.BackColor = Color.IndianRed;
             btnCancelar.Location = new Point(260, 218);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(132, 58);
             btnCancelar.TabIndex = 5;
             btnCancelar.Text = "Cancelar";
-            btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.UseVisualStyleBackColor = false;
             btnCancelar.Click += btnCancelar_Click;
             // 
             // CambioContra

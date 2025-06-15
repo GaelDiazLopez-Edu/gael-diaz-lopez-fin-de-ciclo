@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace Pizzalia
 {
@@ -17,18 +14,6 @@ namespace Pizzalia
         private int? articuloSeleccionadoId = null;
         private readonly string rutaJson = "articulos.json";
 
-        private void InicializarControles()
-        {
-            btnAgregar.Click += btnAgregar_Click;
-            btnEditar.Click += btnEditar_Click;
-            btnEliminar.Click += btnEliminar_Click;
-            btnLimpiar.Click += btnLimpiar_Click;
-            dataGridViewArticulos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewArticulos.MultiSelect = false;
-            dataGridViewArticulos.ReadOnly = true;
-            dataGridViewArticulos.AllowUserToAddRows = false;
-            dataGridViewArticulos.CellClick += dataGridViewArticulos_CellClick;
-        }
         public Articulos()
         {
             InitializeComponent();
@@ -37,16 +22,38 @@ namespace Pizzalia
             RefrescarGrid();
         }
 
-        private void textBoxNombre_TextChanged(object sender, EventArgs e)
+        private void InicializarControles()
         {
-
+            dataGridViewArticulos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewArticulos.MultiSelect = false;
+            dataGridViewArticulos.ReadOnly = true;
+            dataGridViewArticulos.AllowUserToAddRows = false;
+            dataGridViewArticulos.ColumnHeadersDefaultCellStyle.Font = new Font(
+                dataGridViewArticulos.Font,
+                FontStyle.Bold
+            );
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if (!ValidarCampos()) return;
-
             string nombre = textBoxNombre.Text.Trim();
+            if (string.IsNullOrEmpty(nombre))
+            {
+                MessageBox.Show("El nombre es obligatorio.");
+                return;
+            }
+            if (comboBoxCategoria.SelectedItem == null)
+            {
+                MessageBox.Show("Seleccione una categoría.");
+                return;
+            }
+
+            if (articulos.Any(a => a.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase)))
+            {
+                MessageBox.Show("Ya existe un artículo con ese nombre. Por favor, elija otro nombre.");
+                return;
+            }
+
             decimal precioBase = numericUpDownPrecio.Value;
             string categoria = comboBoxCategoria.SelectedItem.ToString();
 
@@ -62,36 +69,42 @@ namespace Pizzalia
             GuardarArticulosEnJson();
             RefrescarGrid();
             LimpiarCampos();
+            MessageBox.Show("Se ha añadido el producto correctamente.");
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            // Validar primero los campos
             if (!ValidarCampos()) return;
 
-            // Comprobar si hay artículo seleccionado y existe en la lista
             if (articuloSeleccionadoId == null || !articulos.Any(a => a.Id == articuloSeleccionadoId.Value))
             {
                 MessageBox.Show("Seleccione un artículo válido para editar.");
                 return;
             }
 
+            string nuevoNombre = textBoxNombre.Text.Trim();
+            if (articulos.Any(a => a.Id != articuloSeleccionadoId.Value && a.Nombre.Equals(nuevoNombre, StringComparison.OrdinalIgnoreCase)))
+            {
+                MessageBox.Show("Ya existe otro artículo con ese nombre.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             var articulo = articulos.FirstOrDefault(a => a.Id == articuloSeleccionadoId.Value);
             if (articulo != null)
             {
-                articulo.Nombre = textBoxNombre.Text.Trim();
+                articulo.Nombre = nuevoNombre;
                 articulo.Precio = numericUpDownPrecio.Value;
                 articulo.Categoria = comboBoxCategoria.SelectedItem.ToString();
 
                 GuardarArticulosEnJson();
                 RefrescarGrid();
                 LimpiarCampos();
+                MessageBox.Show("Artículo editado correctamente.");
             }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            // Comprobar si hay artículo seleccionado y existe en la lista
             if (articuloSeleccionadoId == null || !articulos.Any(a => a.Id == articuloSeleccionadoId.Value))
             {
                 MessageBox.Show("Seleccione un artículo válido para eliminar.");
@@ -102,6 +115,7 @@ namespace Pizzalia
             GuardarArticulosEnJson();
             RefrescarGrid();
             LimpiarCampos();
+            MessageBox.Show("Artículo eliminado correctamente.");
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -120,6 +134,7 @@ namespace Pizzalia
                 comboBoxCategoria.SelectedItem = fila.Cells["Categoria"].Value.ToString();
             }
         }
+
         private bool ValidarCampos()
         {
             string nombre = textBoxNombre.Text.Trim();
@@ -135,6 +150,7 @@ namespace Pizzalia
             }
             return true;
         }
+
         private void LimpiarCampos()
         {
             articuloSeleccionadoId = null;
@@ -142,19 +158,23 @@ namespace Pizzalia
             numericUpDownPrecio.Value = 1;
             comboBoxCategoria.SelectedIndex = -1;
         }
+
         private void RefrescarGrid()
         {
             var datos = articulos.Select(a => new
             {
                 a.Id,
                 a.Nombre,
-                Precio = a.Precio,
+                a.Precio,
                 a.Categoria
             }).ToList();
 
             dataGridViewArticulos.DataSource = null;
             dataGridViewArticulos.DataSource = datos;
             dataGridViewArticulos.Columns["Id"].Visible = false;
+
+            // Aquí se fuerza el formato con dos decimales
+            dataGridViewArticulos.Columns["Precio"].DefaultCellStyle.Format = "N2";
         }
 
         private void GuardarArticulosEnJson()

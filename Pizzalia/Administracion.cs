@@ -26,15 +26,22 @@ namespace Pizzalia
         private void button1_Click(object sender, EventArgs e)
         {
             Usuarios usuariosForm = new Usuarios();
-            usuariosForm.StartPosition = FormStartPosition.CenterScreen; // Opcional, para centrar la ventana
-            usuariosForm.ShowDialog(); // Modal, espera a que se cierre antes de volver a Administracion
+            usuariosForm.StartPosition = FormStartPosition.CenterScreen; // Para centrar la ventana, esto es opcional pero queda mejor
+            usuariosForm.ShowDialog(); //Espera a que se cierre UsuariosForm para volver a Administracion
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             Articulos articulosForm = new Articulos();
-            articulosForm.StartPosition = FormStartPosition.CenterScreen; // Opcional, para centrar la ventana
-            articulosForm.ShowDialog(); // Modal, espera a que se cierre antes de volver a Administracion
+            articulosForm.StartPosition = FormStartPosition.CenterScreen;
+            articulosForm.ShowDialog(); 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Inventario inventarioForm = new Inventario();
+            inventarioForm.StartPosition = FormStartPosition.CenterScreen;
+            inventarioForm.ShowDialog();
         }
     }
 }
